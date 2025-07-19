@@ -78,3 +78,11 @@ export const getStatusVariant = (status: string) => {
   if (status === "Terlambat") return "destructive";
   return "secondary";
 };
+
+
+export const getTodayInJakarta = () => {
+  const now = new Date();
+  const jakartaOffset = 7 * 60; // WIB = UTC+7
+  const jakartaTime = new Date(now.getTime() + (jakartaOffset * 60 * 1000));
+  return jakartaTime.toISOString().split('T')[0];
+};

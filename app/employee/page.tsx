@@ -27,7 +27,7 @@ import React, { useEffect, useState } from "react";
 import { clockIn, clockOut, getLogs } from "@/lib/api";
 import { AttendanceRecord } from "@/types/type";
 import { Badge } from "@/components/ui/badge";
-import { checkStatusAttendance, formatDate, formatTime } from "@/lib/utils";
+import { checkStatusAttendance, formatDate, formatTime, getTodayInJakarta } from "@/lib/utils";
 import { AttendanceDialog } from "./AttendanceDialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -58,23 +58,33 @@ export default function AttendanceApp() {
     date: string;
   } | null>(null);
 
-  const updateTodayStatus = (logs: AttendanceRecord[]) => {
-    const today = new Date().toISOString().split("T")[0];
-    const todayLog = logs.find((log) => {
-      const logDate = new Date(log.date_attendance).toISOString().split("T")[0];
-      return logDate === today;
+ const updateTodayStatus = (logs: AttendanceRecord[]) => {
+  const today = getTodayInJakarta(); // "YYYY-MM-DD" dalam zona waktu Jakarta
+
+  const todayLog = logs.find((log) => {
+    console.log("Log:", log.date_attendance);
+
+    const logDate = new Date(log.date_attendance).toLocaleDateString("en-CA", {
+      timeZone: "Asia/Jakarta",
     });
+    console.log("Log date:", logDate, "Today:", today);
 
-    setAttendanceID(todayLog?.attendance_id);
+    return logDate === today;
+  });
 
-    if (!todayLog) {
-      setTodayStatus("checkin");
-    } else if (todayLog.clock_in && !todayLog.clock_out) {
-      setTodayStatus("checkout");
-    } else if (todayLog.clock_in && todayLog.clock_out) {
-      setTodayStatus("done");
-    }
-  };
+  console.log("Today's log:", todayLog);
+
+  setAttendanceID(todayLog?.attendance_id);
+
+  if (!todayLog) {
+    setTodayStatus("checkin");
+  } else if (todayLog.clock_in && !todayLog.clock_out) {
+    setTodayStatus("checkout");
+  } else if (todayLog.clock_in && todayLog.clock_out) {
+    setTodayStatus("done");
+  }
+};
+
 
   const fetchData = async () => {
     if (!user?.employee_id) {
