@@ -1,28 +1,54 @@
+readme_content = """
 # Frontend Absensi - Employee Attendance System
 
 A modern web application for employee attendance management built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Features
 
-- **User Authentication**: Secure login system for employees and administrators
-- **Role-Based Access Control**: Different interfaces for employees and administrators
-- **Employee Dashboard**: Clock-in/out functionality, attendance history, and status tracking
-- **Admin Dashboard**: Department management, employee management, and attendance reports
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **User Authentication**: Secure login system for employees and administrators  
+- **Role-Based Access Control**: Different interfaces for employees and administrators  
+- **Employee Dashboard**: Clock-in/out functionality, attendance history, and status tracking  
+- **Admin Dashboard**: Department management, employee management, and attendance reports  
+- **Responsive Design**: Works seamlessly on desktop and mobile devices  
 
 ## Tech Stack
 
-- **Framework**: [Next.js 15](https://nextjs.org/) with App Router
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components**: Custom components with [Shaden UI]((https://ui.shadcn.com/))
+- **Framework**: [Next.js 15](https://nextjs.org/) with App Router  
+- **Language**: [TypeScript](https://www.typescriptlang.org/)  
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)  
+- **UI Components**: Custom components with [Shadcn UI](https://ui.shadcn.com/)  
 
+## Screenshots
+
+### Admin Dashboard
+
+| Dashboard 1 | Dashboard 2 |
+|-------------|-------------|
+| ![](./img/1.png) | ![](./img/2.png) |
+
+| Dashboard 3 | Dashboard 4 |
+|-------------|-------------|
+| ![](./img/3.png) | ![](./img/4.png) |
+
+### Employee Dashboard
+
+| Employee View 1 | Employee View 2 |
+|------------------|------------------|
+| ![](./img/5.png) | ![](./img/6.png) |
+
+| Employee View 3 | Employee View 4 |
+|------------------|------------------|
+| ![](./img/7.png) | ![](./img/8.png) |
+
+| Employee View 5 | Employee View 6 |
+|------------------|------------------|
+| ![](./img/9.png) | ![](./img/10.png) |
 
 ## Prerequisites
 
-- Node.js 18.x or higher
-- npm or yarn
-- Backend API running (see backend-absensi project)
+- Node.js 18.x or higher  
+- npm or yarn  
+- Backend API running (see backend-absensi project)  
 
 ## Getting Started
 
@@ -33,6 +59,7 @@ A modern web application for employee attendance management built with Next.js, 
 ```bash
 git clone https://github.com/rustam76/frontend-absensi.git
 cd frontend-absensi
+
 ```
 
 2. Install dependencies
