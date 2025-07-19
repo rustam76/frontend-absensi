@@ -23,41 +23,29 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { EmployeeBase } from "@/types/type";
+import { Employee, EmployeeBase, Departement } from "@/types/type";
 
-type Departement = {
-  id: number;
-  departement_name: string;
-};
-
-type Employee = {
-  id?: number; // Tambahkan id untuk edit mode
-  employee_id: string;
-  name: string;
-  address: string;
-  departement_id: string;
-};
-
-
-interface Props {
+interface EmployeeModalProps {
   employee?: Employee;
   mode: "edit" | "add";
-  onSave: (data: EmployeeBase | Employee) => void;
+  onSave: (data: any) => Promise<void>;
 }
 
-
-export function EmployeeModal({ employee, mode, onSave }: Props) {
+export function EmployeeModal({ employee, mode, onSave }: EmployeeModalProps) {
   const [departements, setDepartements] = useState<Departement[]>([]);
   const [open, setOpen] = useState(false);
 
-  const [form, setForm] = useState<Employee>(
-    employee ?? {
-      employee_id: "",
-      name: "",
-      address: "",
-      departement_id: "",
-    }
-  );
+  const [form, setForm] = useState<{
+    employee_id: string;
+    name: string;
+    address: string;
+    departement_id: string;
+  }>({
+    employee_id: employee?.employee_id ?? "",
+    name: employee?.name ?? "",
+    address: employee?.address ?? "",
+    departement_id: employee?.departement_id ?? "",
+  });
 
   console.log("Form data:", form);
   console.log("Available departments:", departements);
@@ -70,8 +58,9 @@ export function EmployeeModal({ employee, mode, onSave }: Props) {
     // Update form ketika props `employee` berubah dan modal dibuka
     if (employee && open) {
       setForm({
-        ...employee,
-        // Pastikan departement_id adalah string
+        employee_id: employee.employee_id,
+        name: employee.name,
+        address: employee.address,
         departement_id: String(employee.departement_id),
       });
     }
@@ -110,10 +99,16 @@ export function EmployeeModal({ employee, mode, onSave }: Props) {
       return;
     }
 
-    // Untuk edit mode, pastikan id disertakan
-    const dataToSave = mode === "edit" && employee?.id 
-      ? { ...form, id: employee.id }
-      : form;
+    // Convert departement_id to number for EmployeeBase consistency
+    const departementIdNumber = parseInt(form.departement_id, 10);
+
+    // Always return EmployeeBase format
+    const dataToSave: EmployeeBase = {
+      employee_id: form.employee_id,
+      name: form.name,
+      address: form.address,
+      departement_id: departementIdNumber,
+    };
 
     console.log("Saving data:", dataToSave);
     onSave(dataToSave);

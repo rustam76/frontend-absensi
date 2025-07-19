@@ -75,10 +75,10 @@ export default function Page() {
     setTimeout(() => setOpenDialog(false), 2000);
   };
 
-  const handleAddEmployee = async (employee: EmployeeBase) => {
+  const handleAddEmployee = async (employeeData: EmployeeBase) => {
     try {
       const newId = Math.max(...data.map((d) => d.id), 0) + 1;
-      const employeeWithId = { ...employee, id: newId };
+      const employeeWithId = { ...employeeData, id: newId };
       await createEmployee(employeeWithId);
       fetchData();
       showSuccessDialog("Berhasil menambahkan karyawan");
@@ -87,9 +87,9 @@ export default function Page() {
     }
   };
 
-  const handleEditEmployee = async (updatedEmployee: EmployeeBase) => {
+  const handleEditEmployee = async (employeeData: Employee) => {
     try {
-      await updateEmployee(updatedEmployee.employee_id, updatedEmployee);
+      await updateEmployee(employeeData.employee_id, employeeData);
       fetchData();
       showSuccessDialog("Berhasil mengedit karyawan");
     } catch (error) {

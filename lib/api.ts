@@ -50,7 +50,7 @@ export async function createEmployee(employee: any) {
     return res.json();    
 }
 
-export async function updateEmployee(id: string, employee: EmployeeBase) {
+export async function updateEmployee(id: string, employee: any) {
     const res = await fetch(`${apiUrl}/employee/${id}`, {
         method: 'PUT',
         headers: {
