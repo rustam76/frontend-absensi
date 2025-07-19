@@ -15,11 +15,8 @@ A modern web application for employee attendance management built with Next.js, 
 - **Framework**: [Next.js 15](https://nextjs.org/) with App Router
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components**: Custom components with [Radix UI](https://www.radix-ui.com/)
-- **Data Tables**: [TanStack Table](https://tanstack.com/table/latest)
-- **HTTP Client**: [Axios](https://axios-http.com/)
-- **Authentication**: JWT with custom implementation
-- **State Management**: React Context API
+- **UI Components**: Custom components with [Shaden UI]((https://ui.shadcn.com/))
+
 
 ## Prerequisites
 
@@ -34,7 +31,7 @@ A modern web application for employee attendance management built with Next.js, 
 1. Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/rustam76/frontend-absensi.git
 cd frontend-absensi
 ```
 
