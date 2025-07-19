@@ -126,59 +126,60 @@ export const columns: ColumnDef<AttendanceRecord>[] = [
     },
   },
   {
-    accessorKey: "clock_in",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="h-8 px-2 lg:px-3"
-        >
-          <Clock className="mr-2 h-4 w-4 text-muted-foreground" />
-          Clock In
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => {
-      const clockIn = row.getValue("clock_in");
-      return (
-        <div className="flex items-center space-x-2">
-          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-          <span className="font-mono text-sm">
-            {clockIn ? formatTime(clockIn) : "-"}
-          </span>
-        </div>
-      );
-    },
-  },
+  accessorKey: "clock_in",
+  header: "Status Clock In",
+  cell: ({ row }) => {
+    const clock_in = row.original.clock_in;
+    const max_clock_in_time = row.original.max_clock_in_time;
+    const is_late = row.original.is_late;
+
+    const statusData = checkStatusAttendance(
+      typeof clock_in === 'string' ? clock_in : '',
+      typeof max_clock_in_time === 'string' ? max_clock_in_time : '',
+      is_late === false,
+      'in'
+    );
+
+    return <span>{statusData}</span>;
+  }
+},
   {
-    accessorKey: "clock_out",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="h-8 px-2 lg:px-3"
-        >
-          <Clock className="mr-2 h-4 w-4 text-muted-foreground" />
-          Clock Out
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => {
-      const clockOut = row.getValue("clock_out");
-      return (
-        <div className="flex items-center space-x-2">
-          <div className={`w-2 h-2 rounded-full ${clockOut ? 'bg-red-500' : 'bg-gray-300'}`}></div>
-          <span className="font-mono text-sm">
-            {clockOut ? formatTime(clockOut) : "-"}
-          </span>
-        </div>
-      );
-    },
-  },
+  accessorKey: "clock_out",
+  header: "Status Clock Out",
+  cell: ({ row }) => {
+    const clock_out = row.original.clock_out;
+    const max_clock_out_time = row.original.max_clock_out_time;
+    const is_leave_early = row.original.is_leave_early;
+
+    const statusData = checkStatusAttendance(
+      typeof clock_out === 'string' ? clock_out : '',
+      typeof max_clock_out_time === 'string' ? max_clock_out_time : '',
+      is_leave_early === false,
+      'out'
+    );
+
+    return <span>{statusData}</span>;
+  }
+},
+{
+  accessorKey: "clock_in",
+  header: "Status Clock In",
+  cell: ({ row }) => {
+    const clock_in = row.original.clock_in;
+    const max_clock_in_time = row.original.max_clock_in_time;
+    const is_late = row.original.is_late;
+
+    const statusData = checkStatusAttendance(
+      typeof clock_in === 'string' ? clock_in : '',
+      typeof max_clock_in_time === 'string' ? max_clock_in_time : '',
+      is_late === false,
+      'in'
+    );
+
+    return <span>{statusData}</span>;
+  }
+},
+
   {
     accessorKey: "status_clock_in",
     header: "Clock In Status",
